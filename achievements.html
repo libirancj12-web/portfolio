@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CC1 Portfolio - Home</title>
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(235, 221, 221);
+    color: #1b1b1b;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 80px;
+    position: relative;
+    background-color: #1b1b1b;
+    z-index: 10;
+}
+
+.nav-left {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-left a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #cccccc;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+}
+
+.nav-left a:hover {
+    color: #ffffff;
+}
+
+.nav-left a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+}
+
+.brand-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.social-links a {
+    font-size: 18px;
+    color: #cccccc;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* MAIN CONTENT / CONTAINER */
+.page-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 80px 100px;
+}
+
+/* HERO SECTION */
+.hero-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 90px;
+}
+
+@media (min-width: 992px) {
+    .hero-section {
+        grid-template-columns: 2fr 1fr;
+        align-items: flex-end;
+    }
+}
+
+.hero-heading {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #1b1b1b;
+}
+
+@media (max-width: 768px) {
+    .hero-heading {
+        font-size: 38px;
+    }
+}
+
+.hero-side-text {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #4a4a4a;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/* WORK / SERVICES LIST */
+.services-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.service-item {
+    display: flex;
+    flex-direction: column;
+    padding: 45px 0;
+    border-top: 1px solid rgba(114, 92, 92, 0.35);
+    transition: background-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+    .service-item {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
+
+/* SOLID DARK ACCENT COLOR FOR NUMBERS (#725c5c) */
+.service-num {
+    font-size: 18px;
+    font-weight: 800;
+    color: #725c5c; /* Muted accent tone matching information page */
+    width: 60px;
+    margin-bottom: 12px;
+}
+
+.service-main-content {
+    flex: 1;
+    max-width: 550px;
+}
+
+.service-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    color: #1b1b1b;
+}
+
+.service-desc {
+    font-size: 17px;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .service-tags {
+        margin-top: 0;
+        justify-content: flex-end;
+    }
+}
+
+.tag-pill {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #725c5c;
+    border: 1.5px solid rgba(114, 92, 92, 0.4);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.service-item:hover .tag-pill {
+    background-color: #725c5c;
+    color: #ffffff;
+    border-color: #725c5c;
+}
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    background-color: #1b1b1b;
+    color: #cccccc;
+    padding: 25px 80px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.footer strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.footer p {
+    line-height: 1.8;
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 600px) {
+    .header {
+        padding: 20px;
+    }
+
+    .nav-left {
+        display: none;
+    }
+
+    .brand-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .page-container {
+        padding: 40px 24px 60px;
+    }
+
+    .footer {
+        padding: 22px 15px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <ul class="nav-left">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="information.html">Personal Information</a></li>
+        <li><a href="achievements.html">Educational Achievemnts</a></li>
+    </ul>
+
+    <div class="brand-logo">CC1</div>
+
+    <div class="social-links">
+        <a href="#" title="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </div>
+</header>
+
+<!-- PAGE CONTENT -->
+<main class="page-container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <h1 class="hero-heading">
+            From the first question<br>to the final pixel.
+        </h1>
+        <p class="hero-side-text">
+            A hands-on design partner, not another layer of complexity.
+        </p>
+    </section>
+
+    <!-- WORK / SERVICES LIST -->
+    <section class="services-list">
+
+        <!-- 01 -->
+        <article class="service-item">
+            <span class="service-num">01</span>
+            <div class="service-main-content">
+                <h2 class="service-title">Product direction</h2>
+                <p class="service-desc">Framing the right problem before design standardizing the right solution.</p>
+            </div>
+            <div class="service-tags">
+                <span class="tag-pill">RESEARCH</span>
+                <span class="tag-pill">CLARITY</span>
+                <span class="tag-pill">FOCUS</span>
+                <span class="tag-pill">STRATEGY</span>
+            </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="service-item">
+            <span class="service-num">02</span>
+            <div class="service-main-content">
+                <h2 class="service-title">Digital experiences</h2>
+                <p class="service-desc">Mobile apps and interfaces that make complex interactions simple.</p>
+            </div>
+            <div class="service-tags">
+                <span class="tag-pill">INTERFACE</span>
+                <span class="tag-pill">PROTOTYPE</span>
+                <span class="tag-pill">DESIGNS</span>
+            </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="service-item">
+            <span class="service-num">03</span>
+            <div class="service-main-content">
+                <h2 class="service-title">Systems that scale</h2>
+                <p class="service-desc">Architecting robust frameworks so your product's next iteration stays structured.</p>
+            </div>
+            <div class="service-tags">
+                <span class="tag-pill">DESIGN SYSTEM</span>
+                <span class="tag-pill">TOKENS</span>
+                <span class="tag-pill">UI KIT</span>
+                <span class="tag-pill">ACCESSIBILITY</span>
+            </div>
+        </article>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>
+        © 2026 <strong>Libiran, Cyrill Aljaylen S.</strong>
+        | CICTS1E | All Rights Reserved.
+    </p>
+</footer>
+
+</body>
+</html>
