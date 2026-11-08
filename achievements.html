@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,12 +120,12 @@ a {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
-    margin-bottom: 90px;
+    margin-bottom: 70px;
 }
 
 @media (min-width: 992px) {
     .hero-section {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1.8fr 1fr;
         align-items: flex-end;
     }
 }
@@ -169,22 +170,22 @@ a {
     .service-item {
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 120px;
     }
 }
 
-/* SOLID DARK ACCENT COLOR FOR NUMBERS (#725c5c) */
 .service-num {
     font-size: 18px;
     font-weight: 800;
-    color: #725c5c; /* Muted accent tone matching information page */
-    width: 60px;
+    color: #725c5c;
+    width: 40px;
     margin-bottom: 12px;
 }
 
 .service-main-content {
     flex: 1;
-    max-width: 550px;
+    max-width: 600px;
 }
 
 .service-title {
@@ -199,39 +200,6 @@ a {
     font-size: 17px;
     color: #4a4a4a;
     line-height: 1.6;
-}
-
-.service-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-@media (min-width: 768px) {
-    .service-tags {
-        margin-top: 0;
-        justify-content: flex-end;
-    }
-}
-
-.tag-pill {
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #725c5c;
-    border: 1.5px solid rgba(114, 92, 92, 0.4);
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: all 0.2s ease;
-}
-
-.service-item:hover .tag-pill {
-    background-color: #725c5c;
-    color: #ffffff;
-    border-color: #725c5c;
 }
 
 /* FOOTER */
@@ -289,7 +257,7 @@ a {
     <ul class="nav-left">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="information.html">Personal Information</a></li>
-        <li><a href="achievements.html">Educational Achievemnts</a></li>
+        <li><a href="achievements.html">Educational Achievements</a></li>
     </ul>
 
     <div class="brand-logo">CC1</div>
@@ -307,10 +275,10 @@ a {
     <!-- HERO SECTION -->
     <section class="hero-section">
         <h1 class="hero-heading">
-            From the first question<br>to the final pixel.
+            My Academic Achievements <br> throughout the years
         </h1>
         <p class="hero-side-text">
-            A hands-on design partner, not another layer of complexity.
+            A showcase of academic excellence, personal growth, and dedication to continuous learning.
         </p>
     </section>
 
@@ -321,14 +289,8 @@ a {
         <article class="service-item">
             <span class="service-num">01</span>
             <div class="service-main-content">
-                <h2 class="service-title">Product direction</h2>
-                <p class="service-desc">Framing the right problem before design standardizing the right solution.</p>
-            </div>
-            <div class="service-tags">
-                <span class="tag-pill">RESEARCH</span>
-                <span class="tag-pill">CLARITY</span>
-                <span class="tag-pill">FOCUS</span>
-                <span class="tag-pill">STRATEGY</span>
+                <h2 class="service-title">Outstanding Performance in Social Sciences</h2>
+                <p class="service-desc">Peak critical understanding in Araling Panlipunan and humanities.</p>
             </div>
         </article>
 
@@ -336,13 +298,8 @@ a {
         <article class="service-item">
             <span class="service-num">02</span>
             <div class="service-main-content">
-                <h2 class="service-title">Digital experiences</h2>
-                <p class="service-desc">Mobile apps and interfaces that make complex interactions simple.</p>
-            </div>
-            <div class="service-tags">
-                <span class="tag-pill">INTERFACE</span>
-                <span class="tag-pill">PROTOTYPE</span>
-                <span class="tag-pill">DESIGNS</span>
+                <h2 class="service-title">Conduct Award in Makatao</h2>
+                <p class="service-desc">This value focuses on empathy, kindness, respect for human rights, and inclusivity.</p>
             </div>
         </article>
 
@@ -350,14 +307,8 @@ a {
         <article class="service-item">
             <span class="service-num">03</span>
             <div class="service-main-content">
-                <h2 class="service-title">Systems that scale</h2>
-                <p class="service-desc">Architecting robust frameworks so your product's next iteration stays structured.</p>
-            </div>
-            <div class="service-tags">
-                <span class="tag-pill">DESIGN SYSTEM</span>
-                <span class="tag-pill">TOKENS</span>
-                <span class="tag-pill">UI KIT</span>
-                <span class="tag-pill">ACCESSIBILITY</span>
+                <h2 class="service-title">Award for Work Immersion</h2>
+                <p class="service-desc">For Grade 12 students who achieve outstanding workplace evaluations during their external industry internships.</p>
             </div>
         </article>
 
