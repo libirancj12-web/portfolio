@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Featured Layout</title>
+
+<!-- Fonts & Icons from template -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #ebdddd 0%, #d5c4c4 50%, #c9b5b5 100%);
+    background-attachment: fixed;
+    color: #1b1b1b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 80px;
+    position: relative;
+    background-color: rgba(27, 27, 27, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.nav-left {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-left a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #cccccc;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+}
+
+.nav-left a:hover {
+    color: #ffffff;
+}
+
+.nav-left a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+}
+
+.brand-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.social-links a {
+    font-size: 18px;
+    color: #cccccc;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* MAIN CONTENT CONTAINER */
+.main-container {
+    flex: 1;
+    width: 100%;
+    max-width: 1600px;
+    margin: 30px auto;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 28px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+/* CARD STYLING */
+.card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(27, 27, 27, 0.8);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
+}
+
+.image-box {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(27, 27, 27, 0.1);
+}
+
+/* Top Landscape Card Image Height */
+.card-landscape .image-box {
+    height: 520px;
+}
+
+/* Bottom Row Grid for Portrait Cards */
+.bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+/* Bottom Portrait Cards Image Heights (Tall / Vertical Ratio) */
+.card-portrait .image-box {
+    height: 600px;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* TRANSPARENT TITLE BADGE */
+.image-title-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(27, 27, 27, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.card-content {
+    padding: 28px 32px;
+}
+
+.card-content h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1b1b1b;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.card-content p {
+    font-size: 17px;
+    color: #3a3a3a;
+    line-height: 1.7;
+}
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    background-color: #1b1b1b;
+    color: #cccccc;
+    padding: 25px 80px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin-top: auto;
+}
+
+.footer strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.footer p {
+    line-height: 1.8;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 30px;
+    }
+
+    .card-landscape .image-box {
+        height: 420px;
+    }
+
+    .card-portrait .image-box {
+        height: 480px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 20px 30px;
+    }
+
+    .nav-left {
+        display: none;
+    }
+
+    .brand-logo {
+        position: static;
+        transform: none;
+    }
+
+    .main-container {
+        padding: 20px;
+        margin: 15px auto;
+        gap: 20px;
+    }
+
+    .bottom-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card-landscape .image-box {
+        height: 280px;
+    }
+
+    .card-portrait .image-box {
+        height: 380px;
+    }
+
+    .footer {
+        padding: 22px 15px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <ul class="nav-left">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="information.html">Personal Information</a></li>
+        <li><a href="achievements.html">Educational Achievements</a></li>
+    </ul>
+
+    <div class="brand-logo">CC1</div>
+
+    <div class="social-links">
+        <a href="#" title="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </div>
+</header>
+
+<!-- MAIN CONTAINER -->
+<main class="main-container">
+
+    <!-- Top Landscape Image Card -->
+    <article class="card card-landscape">
+        <div class="image-box">
+            <div class="image-title-badge">Hero Landscape</div>
+            <img src="https://picsum.photos/1600/900?random=1" alt="Featured Landscape Image">
+        </div>
+        <div class="card-content">
+            <h3>Featured Landscape Spotlight</h3>
+            <p>This wide landscape banner spans across the widescreen layout container, offering an immersive hero section view.</p>
+        </div>
+    </article>
+
+    <!-- Bottom Two Portrait Image Cards -->
+    <div class="bottom-row">
+
+        <article class="card card-portrait">
+            <div class="image-box">
+                <div class="image-title-badge">Portrait 01</div>
+                <img src="https://picsum.photos/800/1200?random=2" alt="Portrait Content Image 1">
+            </div>
+            <div class="card-content">
+                <h3>Portrait Feature One</h3>
+                <p>This card features a tall portrait orientation image box paired with clean bottom description text.</p>
+            </div>
+        </article>
+
+        <article class="card card-portrait">
+            <div class="image-box">
+                <div class="image-title-badge">Portrait 02</div>
+                <img src="https://picsum.photos/800/1200?random=3" alt="Portrait Content Image 2">
+            </div>
+            <div class="card-content">
+                <h3>Portrait Feature Two</h3>
+                <p>Mirrors the exact tall portrait dimensions and translucent styling of the adjacent card.</p>
+            </div>
+        </article>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>
+        © 2026 <strong>Libiran, Cyrill Aljaylen S.</strong>
+        | CICTS1E | All Rights Reserved.
+    </p>
+</footer>
+
+</body>
+</html>
