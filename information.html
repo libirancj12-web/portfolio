@@ -7,24 +7,101 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,SOFT,WONK,wght@9..144,100,1,600..800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+:root {
+    --bg: rgb(235, 221, 221);
+    --cream: #f6ecec;
+    --dark: #1b1b1b;
+    --mauve: #725c5c;
+    --sage: #6b7b6e;
+    --rose: #9c6b66;
+    --ink: #1b1b1b;
+    --ink-soft: #3d3939;
+    --font-serif: 'Fraunces', serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: rgb(235, 221, 221);
-    color: #1b1b1b;
-    min-height: 100vh;
-    overflow-x: hidden;
+html, body {
+    height: 100dvh;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--ink);
     font-size: 18px;
-    line-height: 1.8;
+    line-height: 1.5;
+}
+
+.app-shell {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(107, 123, 110, 0.18), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(156, 107, 102, 0.18), transparent 45%),
+        var(--bg);
+}
+
+.dot-pattern {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background-image: radial-gradient(rgba(114, 92, 92, 0.3) 1.5px, transparent 1.5px);
+    background-size: 13px 13px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dots-left {
+    top: 16px;
+    left: 16px;
+}
+
+.dots-right {
+    bottom: 16px;
+    right: 16px;
+}
+
+.soft-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(65px);
+    z-index: 0;
+    animation: softPulse 8s ease-in-out infinite alternate;
+}
+
+.glow-a {
+    width: 280px;
+    height: 280px;
+    background: rgba(107, 123, 110, 0.18);
+    top: 16%;
+    left: 5%;
+}
+
+.glow-b {
+    width: 280px;
+    height: 280px;
+    background: rgba(156, 107, 102, 0.18);
+    bottom: 14%;
+    right: 6%;
+    animation-delay: -4s;
+}
+
+@keyframes softPulse {
+    0% { transform: scale(0.96); opacity: 0.7; }
+    100% { transform: scale(1.06); opacity: 1; }
 }
 
 a {
@@ -37,177 +114,326 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 80px;
+    padding: 16px 64px;
+    background-color: var(--dark);
+    border-bottom: 2px solid var(--mauve);
+    flex-shrink: 0;
     position: relative;
-    background-color: #1b1b1b;
-    z-index: 10;
+    z-index: 20;
 }
 
 .nav-left {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
 }
 
 .nav-left a {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16.5px;
+    font-weight: 500;
     color: #cccccc;
     position: relative;
     padding-bottom: 4px;
     transition: color 0.2s ease;
 }
 
-.nav-left a:hover {
+.nav-left a:hover,
+.nav-left a.active {
     color: #ffffff;
 }
 
-.nav-left a.active::after {
+.nav-left a::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background-color: #ffffff;
+    background: linear-gradient(90deg, var(--rose), var(--sage));
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.nav-left a:hover::after,
+.nav-left a.active::after {
+    width: 100%;
 }
 
 .brand-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
-    background-color: #ffffff;
-    color: #1b1b1b;
+    width: 44px;
+    height: 44px;
+    background-color: var(--cream);
+    color: var(--dark);
+    border: 2px solid var(--sage);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 16px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.social-links {
+.brand-logo:hover {
+    transform: translateX(-50%) scale(1.06);
+    border-color: var(--rose);
+}
+
+.header-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 12px;
+}
+
+.live-clock {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--cream);
+    background: rgba(156, 107, 102, 0.26);
+    border: 1px solid rgba(156, 107, 102, 0.55);
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
 .social-links a {
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     color: #cccccc;
-    transition: transform 0.2s ease, color 0.2s ease;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .social-links a:hover {
     color: #ffffff;
-    transform: translateY(-2px);
+    background-color: var(--rose);
+    transform: translateY(-1px);
 }
 
-/* BIOGRAPHY CONTAINER */
+/* CONTAINER */
 .container {
-    max-width: 1300px;
+    flex: 1;
+    min-height: 0;
+    max-width: 1380px;
+    width: 100%;
     margin: 0 auto;
-    padding: 40px 70px 80px;
+    padding: 16px 52px;
     display: grid;
-    grid-template-columns: 0.55fr 1fr;
-    grid-template-rows: auto auto auto;
-    column-gap: 65px;
-    row-gap: 55px;
+    grid-template-columns: 0.78fr 1fr;
+    grid-template-rows: auto 1fr 1.15fr;
+    column-gap: 26px;
+    row-gap: 12px;
+    position: relative;
+    z-index: 2;
 }
 
-/* BIOGRAPHY HEADING */
 .heading {
     grid-column: 2;
     grid-row: 1;
-    border-bottom: 2px dashed rgba(114, 92, 92, 0.35);
-    padding-bottom: 30px;
+    border-bottom: 1.5px dashed rgba(156, 107, 102, 0.45);
+    padding-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .heading h1 {
-    font-size: 52px;
-    font-weight: 800;
-    color: #1b1b1b;
-    letter-spacing: -1.5px;
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-size: clamp(36px, 3.8vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
 }
 
-/* SECTION TITLES */
+.heading h1 span {
+    color: var(--rose);
+}
+
+.heading-note {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #ffffff;
+    background-color: var(--sage);
+    padding: 4px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.heading-note:hover {
+    background-color: var(--rose);
+    transform: translateY(-1px);
+}
+
 .section-title {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
 .section-title h3 {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: #1b1b1b;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: var(--ink);
 }
 
 .icon {
-    font-size: 20px;
-    color: #725c5c;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(107, 123, 110, 0.22);
+    color: var(--sage);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
 }
 
-/* PERSONAL INFORMATION */
+.academic .icon {
+    background: rgba(156, 107, 102, 0.22);
+    color: var(--rose);
+}
+
 .personal-info {
     grid-column: 1;
     grid-row: 2;
-    padding-top: 5px;
+    background: rgba(246, 236, 236, 0.78);
+    border: 1px solid rgba(107, 123, 110, 0.35);
+    border-top: 3px solid var(--sage);
+    border-radius: 18px;
+    padding: 12px 18px;
+    box-shadow: 0 8px 20px rgba(114, 92, 92, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.22s ease;
+}
+
+.personal-info:hover {
+    transform: translateY(-2px);
 }
 
 .info-details {
-    font-size: 17px;
-    line-height: 1.9;
-    color: #4a4a4a;
-    font-weight: 400;
+    font-size: 16.5px;
+    line-height: 1.52;
+    color: var(--ink-soft);
+}
+
+.info-details p {
+    padding: 2px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.info-details p:hover,
+.info-details p.active-row {
+    background-color: rgba(107, 123, 110, 0.18);
+    transform: translateX(3px);
 }
 
 .info-details strong {
-    color: #1b1b1b;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink);
 }
 
-/* BIOGRAPHY DESCRIPTION */
+.row-hint {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--mauve);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.info-details p:hover .row-hint,
+.info-details p.active-row .row-hint {
+    opacity: 1;
+}
+
 .description {
     grid-column: 2;
     grid-row: 2;
-    font-size: 19px;
-    line-height: 1.9;
-    color: #4a4a4a;
-    font-weight: 400;
-    margin-top: -5px;
+    background: rgba(246, 236, 236, 0.74);
+    border: 1px solid rgba(156, 107, 102, 0.3);
+    border-left: 4px solid var(--rose);
+    border-radius: 18px;
+    padding: 14px 20px;
+    box-shadow: 0 8px 20px rgba(114, 92, 92, 0.06);
+    font-size: 17.5px;
+    line-height: 1.56;
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .description strong {
-    color: #1b1b1b;
-    font-weight: 800;
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    color: var(--rose);
+    font-size: 21px;
 }
 
 .description p + p {
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
-/* ACADEMIC BACKGROUND */
 .academic {
     grid-column: 1;
     grid-row: 3;
+    min-height: 0;
+    background: rgba(246, 236, 236, 0.78);
+    border: 1px solid rgba(156, 107, 102, 0.32);
+    border-top: 3px solid var(--rose);
+    border-radius: 18px;
+    padding: 12px 18px;
+    box-shadow: 0 8px 20px rgba(114, 92, 92, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .academic-list {
     list-style: none;
-    font-size: 17px;
-    line-height: 1.8;
-    padding-left: 18px;
-    color: #4a4a4a;
-    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.3;
+    padding-left: 14px;
+    border-left: 2px solid rgba(107, 123, 110, 0.45);
+    margin-left: 4px;
+    color: var(--ink-soft);
 }
 
 .academic-list li {
-    margin-bottom: 20px;
+    position: relative;
+    margin-bottom: 6px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.academic-list li:hover,
+.academic-list li.selected-stage {
+    transform: translateX(3px);
+    background-color: rgba(156, 107, 102, 0.14);
 }
 
 .academic-list li:last-child {
@@ -215,41 +441,62 @@ a {
 }
 
 .academic-list li::before {
-    content: "•";
-    color: #725c5c;
-    display: inline-block;
-    width: 18px;
-    margin-left: -18px;
-    font-weight: 800;
+    content: "";
+    position: absolute;
+    left: -18.5px;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--rose);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.academic-list li.selected-stage::before {
+    background-color: var(--sage);
+    transform: scale(1.35);
 }
 
 .academic-list strong {
-    color: #1b1b1b;
-    font-weight: 700;
+    color: var(--ink);
+    font-weight: 600;
 }
 
 .academic-sub {
-    font-size: 15px;
-    color: #666666;
-    font-weight: 400;
-    margin-top: 2px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--mauve);
 }
 
-/* IMAGE GALLERY */
 .gallery {
     grid-column: 2;
     grid-row: 3;
+    min-height: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 45px;
-    align-items: start;
+    gap: 18px;
+    height: 100%;
 }
 
 .image {
-    height: 370px;
+    height: 100%;
+    min-height: 0;
+    position: relative;
     overflow: hidden;
-    background-color: rgba(114, 92, 92, 0.15);
-    box-shadow: 8px 8px 0 rgba(114, 92, 92, 0.12);
+    background-color: var(--cream);
+    box-shadow: 6px 6px 0 rgba(107, 123, 110, 0.28);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery.has-focus .image:not(.focused) {
+    opacity: 0.72;
+}
+
+.image:hover,
+.image.focused {
+    transform: translateY(-3px);
+    box-shadow: 9px 9px 0 rgba(156, 107, 102, 0.35);
 }
 
 .image img {
@@ -260,275 +507,255 @@ a {
     transition: transform 0.4s ease;
 }
 
-.image img:hover {
+.image:hover img,
+.image.focused img {
     transform: scale(1.04);
 }
 
 .image-one {
-    border-top-left-radius: 100px;
-    border-top: 8px solid rgba(114, 92, 92, 0.45);
-    border-left: 8px solid rgba(114, 92, 92, 0.45);
-    outline: 1px solid rgba(27, 27, 27, 0.15);
-    outline-offset: 8px;
+    border-top-left-radius: 64px;
+    border-bottom-right-radius: 14px;
+    border: 3px solid var(--cream);
+    border-top: 5px solid var(--sage);
+    border-left: 5px solid var(--sage);
 }
 
 .image-two {
-    border-top: 5px solid rgba(114, 92, 92, 0.45);
-    border-left: 5px solid rgba(114, 92, 92, 0.45);
+    border-radius: 14px;
+    border: 3px solid var(--cream);
+    border-top: 5px solid var(--rose);
+    border-left: 5px solid var(--rose);
 }
 
 /* FOOTER */
 .footer {
     width: 100%;
-    background-color: #1b1b1b;
+    background-color: var(--dark);
     color: #cccccc;
-    padding: 25px 80px;
+    padding: 13px 64px;
     text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    border-top: 1px solid rgba(156, 107, 102, 0.35);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 20;
 }
 
 .footer strong {
     color: #ffffff;
-    font-weight: 700;
 }
 
-.footer p {
-    line-height: 1.8;
-}
+@media (max-width: 900px) {
+    .header, .footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
-/* TABLET */
-@media (max-width: 1024px) {
-    .header {
-        padding: 24px 40px;
+    .live-clock, .dot-pattern {
+        display: none;
+    }
+
+    .nav-left {
+        gap: 12px;
+    }
+
+    .nav-left a {
+        font-size: 12.5px;
     }
 
     .brand-logo {
         position: static;
         transform: none;
+        width: 34px;
+        height: 34px;
+        font-size: 11.5px;
     }
 
     .container {
-        padding: 35px 40px 60px;
-        grid-template-columns: 0.6fr 1fr;
-        column-gap: 35px;
+        padding: 12px 16px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr 0.85fr;
+        gap: 10px 12px;
     }
 
-    .heading h1 {
-        font-size: 46px;
+    .heading {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        padding-bottom: 4px;
     }
 
-    .gallery {
-        gap: 25px;
-    }
-
-    .image {
-        height: 300px;
-    }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        padding: 30px 25px 50px;
-        row-gap: 35px;
-    }
-
-    .heading,
-    .personal-info,
-    .description,
-    .academic,
-    .gallery {
+    .personal-info {
         grid-column: 1;
-        grid-row: auto;
+        grid-row: 2;
+        padding: 8px 10px;
     }
 
-    .heading h1 {
-        font-size: 42px;
+    .info-details {
+        font-size: 13px;
     }
 
     .description {
-        font-size: 17px;
+        grid-column: 2;
+        grid-row: 2;
+        padding: 8px 12px;
+        font-size: 13.5px;
+        line-height: 1.38;
+    }
+
+    .academic {
+        grid-column: 1;
+        grid-row: 3;
+        padding: 8px 10px;
+    }
+
+    .academic-list {
+        font-size: 12.5px;
+    }
+
+    .academic-list li {
+        margin-bottom: 3px;
     }
 
     .gallery {
-        gap: 20px;
+        grid-column: 2;
+        grid-row: 3;
+        gap: 10px;
     }
 
-    .image {
-        height: 280px;
-    }
-}
-
-@media (max-width: 600px) {
-    .header {
-        padding: 20px;
-    }
-
-    .nav-left {
-        display: none;
-    }
-
-    .brand-logo {
-        width: 42px;
-        height: 42px;
-    }
-
-    .social-links {
-        margin-left: auto;
-    }
-
-    .footer {
-        padding: 22px 15px;
-        font-size: 13px;
-    }
-}
-
-/* SMALL PHONES */
-@media (max-width: 480px) {
-    .container {
-        padding: 25px 20px 40px;
-    }
-
-    .heading h1 {
-        font-size: 36px;
-    }
-
-    .gallery {
-        grid-template-columns: 1fr;
-    }
-
-    .image {
-        height: 350px;
-    }
-
-    .section-title h3 {
-        font-size: 14px;
+    .image-one {
+        border-top-left-radius: 32px;
     }
 }
 </style>
 </head>
 
 <body>
+<div class="app-shell">
+    <div class="soft-glow glow-a"></div>
+    <div class="soft-glow glow-b"></div>
+    <div class="dot-pattern dots-left"></div>
+    <div class="dot-pattern dots-right"></div>
 
-<!-- HEADER -->
-<header class="header">
-
-    <ul class="nav-left">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="information.html" class="active">Personal Information</a></li>
-        <li><a href="achievements.html">Educational Achievemnts</a></li>
-           <li><a href="family.html">Family and Friends</a></li>
-    </ul>
-
-    <div class="brand-logo">CC1</div>
-
-    <div class="social-links">
-        <a href="#" title="Twitter">
-            <i class="fab fa-twitter"></i>
-        </a>
-    </div>
-
-</header>
-
-<!-- BIOGRAPHY CONTENT -->
-<main class="container">
-
-    <section class="heading">
-        <h1>About Me!</h1>
-    </section>
-
-    <!-- PERSONAL INFORMATION -->
-    <section class="personal-info">
-
-        <div class="section-title">
-            <span class="icon">
-                <i class="fas fa-pencil-alt"></i>
-            </span>
-
-            <h3>PERSONAL INFO</h3>
-        </div>
-
-        <div class="info-details">
-            <p><strong>Name:</strong> Cyrill Aljaylen S. Libiran</p>
-            <p><strong>Date of birth:</strong>May 12 2007</p>
-            <p><strong>Email:</strong>libirancj12@gmail.com</p>
-            <p><strong>Place of birth:</strong> Pampanga</p>
-        </div>
-
-    </section>
-
-    <!-- BIOGRAPHY DESCRIPTION -->
-    <section class="description">
-
-        <p>
-            <strong>Hello!</strong> My name is Cyrill Libiran, and I am currently pursuing a Bachelor of Science in Information Technology, specializing in Web Development, at the University of the Cordilleras.
-             Ever since I was a child, I have been immersed in the world of technology, driven by a lifelong passion for playing games and exploring how digital systems work.
-        </p>
-
-        <p>
-         I hope my time at UC is filled with memorable experiences, great connections, and valuable knowledge that will prepare me for my future career.
-        </p>
-
-    </section>
-
-    <!-- ACADEMIC BACKGROUND -->
-    <section class="academic">
-
-        <div class="section-title">
-            <span class="icon">
-                <i class="fas fa-graduation-cap"></i>
-            </span>
-
-            <h3>ACADEMIC BACKGROUND</h3>
-        </div>
-
-        <ul class="academic-list">
-            <li>
-                <strong>Former College</strong>
-                <div class="academic-sub">University of Baguio | 2025 – 2026</div>
-            </li>
-            <li>
-                <strong>Senior High School</strong>
-                <div class="academic-sub">Data Center College of the Philipines | 2023 – 2025</div>
-            </li>
-            <li>
-                <strong>Junior High School</strong>
-                <div class="academic-sub">Rizal National Highschool | 2019 – 2023</div>
-            </li>
-            <li>
-                <strong>Elementary</strong>
-                <div class="academic-sub">Sts Peter and Paul Learning Center | 2013 – 2019</div>
-            </li>
+    <header class="header">
+        <ul class="nav-left">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html" class="active">Personal Information</a></li>
+            <li><a href="achievements.html">Educational Achievements</a></li>
+            <li><a href="family.html">Family and Friends</a></li>
         </ul>
 
-    </section>
+        <div class="brand-logo">CC1</div>
 
-    <!-- IMAGE GALLERY -->
-    <section class="gallery">
-
-        <div class="image image-one">
-            <img src="datacenter.jpg" alt="Profile portrait">
+        <div class="header-right">
+            <span class="live-clock" id="liveClock">--:--:--</span>
+            <div class="social-links">
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
         </div>
+    </header>
 
-        <div class="image image-two">
-            <img src="methooood.jpg" alt="Drawing and illustration">
-        </div>
+    <main class="container">
+        <section class="heading">
+            <h1>Personal <span>Information</span></h1>
+            <span class="heading-note" id="photoCaption" title="Click any item or photo">~ click any card or photo</span>
+        </section>
 
-    </section>
+        <section class="personal-info">
+            <div class="section-title">
+                <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+                <h3>PERSONAL INFO</h3>
+            </div>
+            <div class="info-details" id="infoRows">
+                <p data-copy="Cyrill Aljaylen S. Libiran"><span><strong>Name:</strong> Cyrill Aljaylen S. Libiran</span><span class="row-hint">pin</span></p>
+                <p data-copy="May 12, 2007"><span><strong>DOB:</strong> May 12, 2007</span><span class="row-hint">pin</span></p>
+                <p data-copy="libirancj12@gmail.com"><span><strong>Email:</strong> libirancj12@gmail.com</span><span class="row-hint">pin</span></p>
+                <p data-copy="Pampanga"><span><strong>Origin:</strong> Pampanga</span><span class="row-hint">pin</span></p>
+            </div>
+        </section>
 
-</main>
+        <section class="description">
+            <p>
+                <strong>Hello!</strong> My name is Cyrill Libiran, and I am currently pursuing a Bachelor of Science in Information Technology, specializing in Web Development, at the University of the Cordilleras. Ever since childhood, I have been drawn to games and exploring how digital systems work.
+            </p>
+            <p>
+                I hope my time at UC brings memorable experiences, genuine connections, and lasting knowledge for my future career.
+            </p>
+        </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>
-        © 2026 <strong>Libiran, Cyrill Aljaylen S.</strong>
-        | CICTS1E | All Rights Reserved.
-    </p>
-</footer>
+        <section class="academic">
+            <div class="section-title">
+                <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                <h3>ACADEMIC BACKGROUND</h3>
+            </div>
+            <ul class="academic-list" id="academicList">
+                <li data-note="~ stage: college chapter"><strong>College</strong><div class="academic-sub">Univ. of Baguio | 2025–2026</div></li>
+                <li data-note="~ stage: senior high chapter"><strong>Senior High</strong><div class="academic-sub">Data Center College of the Phil. | 2023–2025</div></li>
+                <li data-note="~ stage: junior high chapter"><strong>Junior High</strong><div class="academic-sub">Rizal National Highschool | 2019–2023</div></li>
+                <li data-note="~ stage: elementary chapter"><strong>Elementary</strong><div class="academic-sub">Sts. Peter &amp; Paul Learning Ctr. | 2013–2019</div></li>
+            </ul>
+        </section>
 
+        <section class="gallery" id="galleryBox">
+            <div class="image image-one" data-note="~ campus &amp; portrait">
+                <img src="datacenter.jpg" alt="Profile portrait">
+            </div>
+            <div class="image image-two" data-note="~ creative &amp; visual">
+                <img src="methooood.jpg" alt="Illustration and creative work">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 <strong>Libiran, Cyrill Aljaylen S.</strong> | CICTS1E | All Rights Reserved.</p>
+    </footer>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString([], { hour12: false });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    const caption = document.getElementById('photoCaption');
+
+    document.querySelectorAll('#infoRows p').forEach((row) => {
+        row.addEventListener('click', () => {
+            document.querySelectorAll('#infoRows p').forEach((r) => {
+                r.classList.remove('active-row');
+                r.querySelector('.row-hint').textContent = 'pin';
+            });
+            row.classList.add('active-row');
+            row.querySelector('.row-hint').textContent = 'pinned';
+            caption.textContent = `~ pinned: ${row.dataset.copy}`;
+        });
+    });
+
+    document.querySelectorAll('#academicList li').forEach((item) => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('#academicList li').forEach((el) => el.classList.remove('selected-stage'));
+            item.classList.add('selected-stage');
+            caption.textContent = item.dataset.note;
+        });
+    });
+
+    const galleryBox = document.getElementById('galleryBox');
+    document.querySelectorAll('.gallery .image').forEach((imgCard) => {
+        imgCard.addEventListener('click', () => {
+            const alreadyFocused = imgCard.classList.contains('focused');
+            document.querySelectorAll('.gallery .image').forEach((c) => c.classList.remove('focused'));
+            if (!alreadyFocused) {
+                imgCard.classList.add('focused');
+                galleryBox.classList.add('has-focus');
+                caption.textContent = imgCard.dataset.note;
+            } else {
+                galleryBox.classList.remove('has-focus');
+                caption.textContent = '~ click any card or photo';
+            }
+        });
+    });
+</script>
 </body>
 </html>

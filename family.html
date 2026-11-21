@@ -3,32 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio - Featured Layout</title>
+<title>CC1 Portfolio - Family & Friends</title>
 
-<!-- Fonts & Icons from template -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,SOFT,WONK,wght@9..144,100,1,600..800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+:root {
+    --cream: #f6ecec;
+    --dark: #1b1b1b;
+    --mauve: #725c5c;
+    --sage: #6b7b6e;
+    --rose: #9c6b66;
+    --ink: #1b1b1b;
+    --ink-soft: #3a3a3a;
+    --font-serif: 'Fraunces', serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #ebdddd 0%, #d5c4c4 50%, #c9b5b5 100%);
-    background-attachment: fixed;
-    color: #1b1b1b;
-    min-height: 100vh;
+html, body {
+    height: 100dvh;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    background:
+        radial-gradient(circle at 85% 15%, rgba(156, 107, 102, 0.18), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(107, 123, 110, 0.18), transparent 45%),
+        linear-gradient(135deg, #ebdddd 0%, #d5c4c4 50%, #c9b5b5 100%);
+    color: var(--ink);
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.app-shell {
+    height: 100dvh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
-    font-size: 18px;
-    line-height: 1.8;
+    overflow: hidden;
+    position: relative;
+}
+
+.dot-accent {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-image: radial-gradient(rgba(114, 92, 92, 0.3) 1.5px, transparent 1.5px);
+    background-size: 13px 13px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.dots-a {
+    top: 66px;
+    left: 10px;
+}
+
+.dots-b {
+    bottom: 52px;
+    right: 10px;
 }
 
 a {
@@ -41,136 +81,225 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 80px;
+    padding: 16px 64px;
+    background-color: var(--dark);
+    border-bottom: 2px solid var(--mauve);
+    flex-shrink: 0;
     position: relative;
-    background-color: rgba(27, 27, 27, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 10;
+    z-index: 20;
 }
 
 .nav-left {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
 }
 
 .nav-left a {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16.5px;
+    font-weight: 500;
     color: #cccccc;
     position: relative;
     padding-bottom: 4px;
     transition: color 0.2s ease;
 }
 
-.nav-left a:hover {
+.nav-left a:hover,
+.nav-left a.active {
     color: #ffffff;
 }
 
-.nav-left a.active::after {
+.nav-left a::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background-color: #ffffff;
+    background: linear-gradient(90deg, var(--rose), var(--sage));
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.nav-left a:hover::after,
+.nav-left a.active::after {
+    width: 100%;
 }
 
 .brand-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
-    background-color: #ffffff;
-    color: #1b1b1b;
+    width: 44px;
+    height: 44px;
+    background-color: var(--cream);
+    color: var(--dark);
+    border: 2px solid var(--sage);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 16px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.social-links {
+.brand-logo:hover {
+    transform: translateX(-50%) scale(1.06);
+    border-color: var(--rose);
+}
+
+.header-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 12px;
+}
+
+.live-clock {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--cream);
+    background: rgba(156, 107, 102, 0.26);
+    border: 1px solid rgba(156, 107, 102, 0.55);
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
 .social-links a {
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     color: #cccccc;
-    transition: transform 0.2s ease, color 0.2s ease;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .social-links a:hover {
     color: #ffffff;
-    transform: translateY(-2px);
+    background-color: var(--rose);
+    transform: translateY(-1px);
 }
 
-/* MAIN CONTENT CONTAINER */
+/* MAIN CONTAINER */
 .main-container {
     flex: 1;
+    min-height: 0;
+    max-width: 1440px;
     width: 100%;
-    max-width: 1600px;
-    margin: 30px auto;
-    padding: 40px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 28px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    margin: 12px auto;
+    padding: 14px 22px;
+    display: grid;
+    grid-template-rows: 1.32fr 0.68fr;
+    gap: 12px;
+    background: rgba(246, 236, 236, 0.44);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    box-shadow: 0 14px 32px rgba(114, 92, 92, 0.08);
+    border-radius: 24px;
+    position: relative;
+    z-index: 2;
+    transition: grid-template-rows 0.28s ease;
 }
 
-/* CARD STYLING */
+.main-container.spotlight-top {
+    grid-template-rows: 1.56fr 0.44fr;
+}
+
 .card {
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
+    min-height: 0;
+    background: rgba(246, 236, 236, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
 }
 
-.card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(27, 27, 27, 0.8);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
+.main-container.has-focus .card:not(.focused-card) {
+    opacity: 0.78;
+}
+
+.card:hover,
+.card.focused-card {
+    transform: translateY(-2px);
+    background: rgba(246, 236, 236, 0.96);
+    border-color: rgba(156, 107, 102, 0.7);
+}
+
+.card-landscape {
+    width: 100%;
+    height: 100%;
+    border-top: 3px solid var(--sage);
+}
+
+.card-landscape .image-box {
+    flex: 1;
+    min-height: 0;
+}
+
+.card-landscape .image-title-badge {
+    top: 14px;
+    left: 14px;
+    padding: 6px 16px;
+    font-size: 13.5px;
+    background: rgba(27, 27, 27, 0.86);
+    border-left: 3px solid var(--sage);
+}
+
+.card-landscape .card-content {
+    padding: 10px 22px;
+}
+
+.card-landscape .card-content p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.bottom-row {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.card-portrait {
+    flex-direction: row;
+}
+
+.bottom-row .card-portrait:first-child {
+    border-left: 3px solid var(--rose);
+}
+
+.bottom-row .card-portrait:first-child .image-title-badge {
+    border-left: 3px solid var(--rose);
+}
+
+.bottom-row .card-portrait:last-child {
+    border-left: 3px solid var(--mauve);
+}
+
+.bottom-row .card-portrait:last-child .image-title-badge {
+    border-left: 3px solid var(--mauve);
+}
+
+.card-portrait .image-box {
+    width: 44%;
+    height: 100%;
+    flex-shrink: 0;
 }
 
 .image-box {
     position: relative;
-    width: 100%;
+    min-height: 0;
     overflow: hidden;
-    border-bottom: 1px solid rgba(27, 27, 27, 0.1);
-}
-
-/* Top Landscape Card Image Height */
-.card-landscape .image-box {
-    height: 520px;
-}
-
-/* Bottom Row Grid for Portrait Cards */
-.bottom-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-}
-
-/* Bottom Portrait Cards Image Heights (Tall / Vertical Ratio) */
-.card-portrait .image-box {
-    height: 600px;
 }
 
 .image-box img {
@@ -178,194 +307,216 @@ a {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
 }
 
-/* TRANSPARENT TITLE BADGE */
+.card:hover .image-box img,
+.card.focused-card .image-box img {
+    transform: scale(1.04);
+}
+
 .image-title-badge {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background: rgba(27, 27, 27, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    top: 10px;
+    left: 10px;
+    background: rgba(27, 27, 27, 0.85);
     color: #ffffff;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    padding: 4px 13px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 2;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.card:hover .image-title-badge {
+    transform: translateX(3px);
+    background: var(--dark);
 }
 
 .card-content {
-    padding: 28px 32px;
-}
-
-.card-content h3 {
-    font-size: 24px;
-    font-weight: 800;
-    color: #1b1b1b;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .card-content p {
-    font-size: 17px;
-    color: #3a3a3a;
-    line-height: 1.7;
+    font-size: 17.5px;
+    color: var(--ink-soft);
+    line-height: 1.45;
 }
 
 /* FOOTER */
 .footer {
     width: 100%;
-    background-color: #1b1b1b;
+    background-color: var(--dark);
     color: #cccccc;
-    padding: 25px 80px;
+    padding: 13px 64px;
     text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    border-top: 1px solid rgba(156, 107, 102, 0.35);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 20;
 }
 
 .footer strong {
     color: #ffffff;
-    font-weight: 700;
 }
 
-.footer p {
-    line-height: 1.8;
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 1200px) {
-    .main-container {
-        padding: 30px;
+@media (max-width: 900px) {
+    .header, .footer {
+        padding-left: 18px;
+        padding-right: 18px;
     }
 
-    .card-landscape .image-box {
-        height: 420px;
-    }
-
-    .card-portrait .image-box {
-        height: 480px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header {
-        padding: 20px 30px;
+    .live-clock, .dot-accent {
+        display: none;
     }
 
     .nav-left {
-        display: none;
+        gap: 12px;
+    }
+
+    .nav-left a {
+        font-size: 12.5px;
     }
 
     .brand-logo {
         position: static;
         transform: none;
+        width: 34px;
+        height: 34px;
+        font-size: 11.5px;
     }
 
-    .main-container {
-        padding: 20px;
-        margin: 15px auto;
-        gap: 20px;
+    .main-container,
+    .main-container.spotlight-top {
+        margin: 8px 12px;
+        padding: 10px;
+        gap: 10px;
+        width: auto;
+        grid-template-rows: 1.32fr 0.68fr;
     }
 
-    .bottom-row {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .card-landscape .image-box {
-        height: 280px;
+    .card-portrait {
+        flex-direction: column;
     }
 
     .card-portrait .image-box {
-        height: 380px;
+        width: 100%;
+        flex: 1;
     }
 
-    .footer {
-        padding: 22px 15px;
-        font-size: 13px;
+    .card-content,
+    .card-landscape .card-content {
+        padding: 8px 12px;
+    }
+
+    .card-content p {
+        font-size: 14.5px;
+        line-height: 1.35;
     }
 }
 </style>
 </head>
+
 <body>
+<div class="app-shell">
+    <div class="dot-accent dots-a"></div>
+    <div class="dot-accent dots-b"></div>
 
-<!-- HEADER -->
-<header class="header">
-    <ul class="nav-left">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="information.html">Personal Information</a></li>
-        <li><a href="achievements.html">Educational Achievements</a></li>
-        <li><a href="family.html">Family and Friends</a></li>
-    </ul>
+    <header class="header">
+        <ul class="nav-left">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html">Personal Information</a></li>
+            <li><a href="achievements.html">Educational Achievements</a></li>
+            <li><a href="family.html" class="active">Family and Friends</a></li>
+        </ul>
 
-    <div class="brand-logo">CC1</div>
+        <div class="brand-logo">CC1</div>
 
-    <div class="social-links">
-        <a href="#" title="Twitter">
-            <i class="fab fa-twitter"></i>
-        </a>
-    </div>
-</header>
-
-<!-- MAIN CONTAINER -->
-<main class="main-container">
-
-    <!-- Top Landscape Image Card -->
-    <article class="card card-landscape">
-        <div class="image-box">
-            <div class="image-title-badge">My Friends</div>
-            <img src="nigga.jpg" alt="Featured Landscape Image">
+        <div class="header-right">
+            <span class="live-clock" id="liveClock">--:--:--</span>
+            <div class="social-links">
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
         </div>
-        <div class="card-content">
-            <h3></h3>
-            <p>My precious friends who helped  me to gain my self confidence and how to socialize.</p>
-        </div>
-    </article>
+    </header>
 
-    <!-- Bottom Two Portrait Image Cards -->
-    <div class="bottom-row">
-
-        <article class="card card-portrait">
+    <main class="main-container" id="familyGrid">
+        <article class="card card-landscape" data-top="true">
             <div class="image-box">
-                <div class="image-title-badge">My Mother</div>
-                <img src="mama.jpg" alt="nigga">
+                <div class="image-title-badge">My Friends</div>
+                <img src="nigga.jpg" alt="My Friends">
             </div>
             <div class="card-content">
-                <h3></h3>
-                <p>My mother who raises me and stayed by my side.</p>
+                <p class="note-text">My precious friends who helped me to gain my self confidence and how to socialize.</p>
             </div>
         </article>
 
-        <article class="card card-portrait">
-            <div class="image-box">
-                <div class="image-title-badge">My Father</div>
-                <img src="papa.jpg" alt="Portrait Content Image 2">
-            </div>
-            <div class="card-content">
-                <h3></h3>
-                <p>My Hardworking father who always work for us i hope to repay him.</p>
-            </div>
-        </article>
+        <div class="bottom-row">
+            <article class="card card-portrait">
+                <div class="image-box">
+                    <div class="image-title-badge">My Mother</div>
+                    <img src="mama.jpg" alt="My Mother">
+                </div>
+                <div class="card-content">
+                    <p class="note-text">My mother who raises me<br>and stayed by my side.</p>
+                </div>
+            </article>
 
-    </div>
+            <article class="card card-portrait">
+                <div class="image-box">
+                    <div class="image-title-badge">My Father</div>
+                    <img src="papa.jpg" alt="My Father">
+                </div>
+                <div class="card-content">
+                    <p class="note-text">My Hardworking father who always<br>work for us i hope to repay him.</p>
+                </div>
+            </article>
+        </div>
+    </main>
 
-</main>
+    <footer class="footer">
+        <p>© 2026 <strong>Libiran, Cyrill Aljaylen S.</strong> | CICTS1E | All Rights Reserved.</p>
+    </footer>
+</div>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>
-        © 2026 <strong>Libiran, Cyrill Aljaylen S.</strong>
-        | CICTS1E | All Rights Reserved.
-    </p>
-</footer>
+<script>
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString([], { hour12: false });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
 
+    const grid = document.getElementById('familyGrid');
+    const cards = document.querySelectorAll('.main-container .card');
+
+    cards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const alreadyFocused = card.classList.contains('focused-card');
+            cards.forEach((c) => c.classList.remove('focused-card'));
+            grid.classList.remove('spotlight-top');
+
+            if (!alreadyFocused) {
+                card.classList.add('focused-card');
+                grid.classList.add('has-focus');
+                if (card.dataset.top === 'true') {
+                    grid.classList.add('spotlight-top');
+                }
+            } else {
+                grid.classList.remove('has-focus');
+            }
+        });
+    });
+</script>
 </body>
 </html>

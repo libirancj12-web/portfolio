@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,24 +7,116 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,SOFT,WONK,wght@9..144,100,1,600..800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+:root {
+    --bg: rgb(235, 221, 221);
+    --cream: #f6ecec;
+    --dark: #1b1b1b;
+    --mauve: #725c5c;
+    --sage: #6b7b6e;
+    --rose: #9c6b66;
+    --ink: #1b1b1b;
+    --ink-soft: #3d3939;
+    --font-serif: 'Fraunces', serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: rgb(235, 221, 221);
-    color: #1b1b1b;
-    min-height: 100vh;
-    overflow-x: hidden;
-    font-size: 18px;
-    line-height: 1.8;
+html, body {
+    height: 100dvh;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.app-shell {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at 82% 22%, rgba(156, 107, 102, 0.2), transparent 45%),
+        radial-gradient(circle at 18% 82%, rgba(107, 123, 110, 0.2), transparent 45%),
+        var(--bg);
+}
+
+.dot-pattern {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-image: radial-gradient(rgba(114, 92, 92, 0.35) 1.6px, transparent 1.6px);
+    background-size: 14px 14px;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 16px;
+}
+
+.dots-top-right {
+    top: 24px;
+    right: 28px;
+}
+
+.dots-bottom-left {
+    bottom: 20px;
+    left: 24px;
+}
+
+.soft-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(65px);
+    z-index: 0;
+    animation: softPulse 7s ease-in-out infinite alternate;
+}
+
+.glow-a {
+    width: 320px;
+    height: 320px;
+    background: rgba(156, 107, 102, 0.22);
+    top: 10%;
+    right: 7%;
+}
+
+.glow-b {
+    width: 280px;
+    height: 280px;
+    background: rgba(107, 123, 110, 0.22);
+    bottom: 10%;
+    left: 6%;
+    animation-delay: -3.5s;
+}
+
+@keyframes softPulse {
+    0% { transform: scale(0.95) translate(0, 0); opacity: 0.7; }
+    100% { transform: scale(1.08) translate(14px, -10px); opacity: 1; }
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes fadeSwap {
+    0% { opacity: 0.35; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.swap-anim {
+    animation: fadeSwap 0.28s ease;
 }
 
 a {
@@ -38,277 +129,508 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 80px;
+    padding: 16px 64px;
+    background-color: var(--dark);
+    border-bottom: 2px solid var(--mauve);
+    flex-shrink: 0;
     position: relative;
-    background-color: #1b1b1b;
-    z-index: 10;
+    z-index: 20;
 }
 
 .nav-left {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
 }
 
 .nav-left a {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16.5px;
+    font-weight: 500;
     color: #cccccc;
     position: relative;
     padding-bottom: 4px;
     transition: color 0.2s ease;
 }
 
-.nav-left a:hover {
+.nav-left a:hover,
+.nav-left a.active {
     color: #ffffff;
 }
 
-.nav-left a.active::after {
+.nav-left a::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background-color: #ffffff;
+    background: linear-gradient(90deg, var(--rose), var(--sage));
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.nav-left a:hover::after,
+.nav-left a.active::after {
+    width: 100%;
 }
 
 .brand-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
-    background-color: #ffffff;
-    color: #1b1b1b;
+    width: 44px;
+    height: 44px;
+    background-color: var(--cream);
+    color: var(--dark);
+    border: 2px solid var(--sage);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 16px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.social-links {
+.brand-logo:hover {
+    transform: translateX(-50%) scale(1.06);
+    border-color: var(--rose);
+}
+
+.header-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 12px;
+}
+
+.live-clock {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--cream);
+    background: rgba(107, 123, 110, 0.26);
+    border: 1px solid rgba(107, 123, 110, 0.55);
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
 .social-links a {
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     color: #cccccc;
-    transition: transform 0.2s ease, color 0.2s ease;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .social-links a:hover {
     color: #ffffff;
-    transform: translateY(-2px);
+    background-color: var(--rose);
+    transform: translateY(-1px);
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero {
+    flex: 1;
+    min-height: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
-    padding: 40px 80px 100px;
-    min-height: calc(100vh - 110px);
+    gap: 28px;
+    padding: 18px 56px;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
     position: relative;
+    z-index: 2;
 }
 
 .glass-overlay-box {
     position: absolute;
-    top: 30px;
-    right: 60px;
-    width: calc(50% - 40px);
-    height: calc(100% - 60px);
-    background: rgba(114, 92, 92, 0.45);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 20px;
+    top: 14px;
+    right: 40px;
+    width: 40%;
+    height: calc(100% - 28px);
+    background: linear-gradient(155deg, rgba(246, 236, 236, 0.78), rgba(114, 92, 92, 0.22));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    box-shadow: 0 16px 36px rgba(114, 92, 92, 0.14);
+    border-radius: 28px;
     z-index: 1;
 }
 
 .hero-image-container {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 40px;
     position: relative;
     z-index: 2;
+    animation: gentleFloat 6s ease-in-out infinite;
 }
 
-.hero-image-container img {
+.tilt-box {
+    width: min(100%, 540px);
+    height: 100%;
+    max-height: 100%;
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    border: 6px solid var(--cream);
+    outline: 2px solid rgba(107, 123, 110, 0.35);
+    box-shadow: 0 18px 38px rgba(27, 27, 27, 0.16);
+    background-color: var(--cream);
+    transition: transform 0.2s ease;
+    transform-style: preserve-3d;
+}
+
+.tilt-box img {
     width: 100%;
-    max-width: 520px;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
 }
 
 .hero-content {
-    padding-left: 20px;
-    max-width: 600px;
+    padding: 20px 26px;
     position: relative;
     z-index: 2;
 }
 
+.tag-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.soft-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: #ffffff;
+    background-color: var(--sage);
+    padding: 6px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 4px 12px rgba(107, 123, 110, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.soft-tag:hover {
+    background-color: var(--rose);
+    transform: translateY(-1px);
+}
+
+.quote-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink);
+    background-color: rgba(246, 236, 236, 0.9);
+    border: 1px solid rgba(156, 107, 102, 0.45);
+    padding: 5px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.quote-btn:hover {
+    background-color: var(--rose);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
 .hero-title {
-    font-size: 54px;
-    font-weight: 800;
-    line-height: 1.25;
-    letter-spacing: -1px;
-    margin-bottom: 24px;
-    color: #1b1b1b;
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-size: clamp(42px, 4.6vw, 62px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--ink);
+}
+
+.hero-title span.accent-word {
+    color: var(--rose);
 }
 
 .hero-description {
-    font-size: 20px;
-    color: #4a4a4a;
-    line-height: 1.8;
-    font-weight: 400;
-    margin-bottom: 32px;
+    font-size: 20.5px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    padding-left: 16px;
+    border-left: 3px solid var(--rose);
+    margin-bottom: 18px;
+}
+
+.mini-strip {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.mini-chip {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink);
+    background: rgba(246, 236, 236, 0.82);
+    border: 1px solid rgba(114, 92, 92, 0.28);
+    padding: 5px 13px;
+    border-radius: 10px;
+}
+
+.hero-links {
+    display: flex;
+    gap: 12px;
+}
+
+.pill-btn {
+    font-size: 15.5px;
+    font-weight: 500;
+    padding: 11px 22px;
+    border-radius: 999px;
+    background-color: var(--dark);
+    color: #ffffff;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pill-btn:hover {
+    background-color: var(--rose);
+    transform: translateY(-1px);
+}
+
+.pill-btn.ghost {
+    background-color: rgba(107, 123, 110, 0.18);
+    color: var(--ink);
+    border: 1px solid rgba(107, 123, 110, 0.45);
+}
+
+.pill-btn.ghost:hover {
+    background-color: var(--sage);
+    color: #ffffff;
 }
 
 /* FOOTER */
 .footer {
     width: 100%;
-    background-color: #1b1b1b;
+    background-color: var(--dark);
     color: #cccccc;
-    padding: 25px 80px;
+    padding: 13px 64px;
     text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    border-top: 1px solid rgba(156, 107, 102, 0.35);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 20;
 }
 
 .footer strong {
     color: #ffffff;
-    font-weight: 700;
 }
 
-.footer p {
-    line-height: 1.8;
-}
+@media (max-width: 900px) {
+    .header, .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
 
-/* TABLET */
-@media (max-width: 1024px) {
-    .header {
-        padding: 24px 40px;
+    .live-clock, .dot-pattern, .mini-strip {
+        display: none;
+    }
+
+    .nav-left {
+        gap: 12px;
+    }
+
+    .nav-left a {
+        font-size: 12.5px;
     }
 
     .brand-logo {
         position: static;
         transform: none;
+        width: 34px;
+        height: 34px;
+        font-size: 11.5px;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding: 40px 40px 80px;
-        text-align: center;
-        min-height: auto;
+    .brand-logo:hover {
+        transform: scale(1.06);
     }
 
     .glass-overlay-box {
         display: none;
     }
 
-    .hero-image-container {
-        padding-right: 0;
-        margin-bottom: 40px;
+    .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 12px 18px;
+        text-align: center;
+    }
+
+    .tilt-box {
+        width: min(100%, 300px);
+        height: 100%;
+        border-radius: 20px;
     }
 
     .hero-content {
-        padding-left: 0;
-        margin: 0 auto;
-    }
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-    .header {
-        padding: 20px;
+        padding: 6px 10px;
     }
 
-    .nav-left {
-        display: none;
-    }
-
-    .brand-logo {
-        width: 42px;
-        height: 42px;
-    }
-
-    .hero {
-        padding: 35px 25px 60px;
-    }
-
-    .hero-title {
-        font-size: 40px;
+    .tag-row {
+        justify-content: center;
     }
 
     .hero-description {
-        font-size: 17px;
+        padding-left: 0;
+        border-left: none;
+        font-size: 15.5px;
+        margin-bottom: 12px;
     }
 
-    .footer {
-        padding: 22px 15px;
-        font-size: 13px;
+    .hero-links {
+        justify-content: center;
     }
 }
 </style>
 </head>
 
 <body>
+<div class="app-shell">
+    <div class="soft-glow glow-a"></div>
+    <div class="soft-glow glow-b"></div>
+    <div class="dot-pattern dots-top-right"></div>
+    <div class="dot-pattern dots-bottom-left"></div>
 
-<!-- HEADER -->
-<header class="header">
+    <header class="header">
+        <ul class="nav-left">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="information.html">Personal Information</a></li>
+            <li><a href="achievements.html">Educational Achievements</a></li>
+            <li><a href="family.html">Family and Friends</a></li>
+        </ul>
 
-    <ul class="nav-left">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="information.html">Personal Information</a></li>
-        <li><a href="achievements.html">Educational Achievemnts</a></li>
-           <li><a href="family.html">Family and Friends</a></li>
-    </ul>
+        <div class="brand-logo">CC1</div>
 
-    <div class="brand-logo">CC1</div>
+        <div class="header-right">
+            <span class="live-clock" id="liveClock">--:--:--</span>
+            <div class="social-links">
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </header>
 
-    <div class="social-links">
-        <a href="#" title="Twitter">
-            <i class="fab fa-twitter"></i>
-        </a>
-    </div>
+    <main class="hero">
+        <div class="glass-overlay-box"></div>
 
-</header>
+        <div class="hero-image-container">
+            <div class="tilt-box" id="tiltBox">
+                <img src="formal.jpeg" alt="Cyrill Aljaylen S. Libiran">
+            </div>
+        </div>
 
-<!-- HERO SECTION -->
-<main class="hero">
+        <div class="hero-content">
+            <div class="tag-row">
+                <div class="soft-tag" id="moodCycle" title="Click to cycle vibe">
+                    <i class="fas fa-sparkles"></i>
+                    <span id="moodLabel">soft &amp; steady</span>
+                </div>
+                <button type="button" class="quote-btn" id="quoteCycle" title="Click for next note">
+                    <i class="fas fa-rotate"></i>
+                    <span>next note</span>
+                </button>
+            </div>
 
-    <div class="glass-overlay-box"></div>
+            <h1 class="hero-title">HI My name is <span class="accent-word">Cyrill!</span></h1>
 
-    <div class="hero-image-container">
-        <img src="formal.jpg" alt="Developer Illustration">
-    </div>
+            <p class="hero-description" id="heroQuote">
+                Life may be full of compromises, but I will keep working toward a better future.
+            </p>
 
-    <div class="hero-content">
-        <h1 class="hero-title">
-     HI My name is Cyrill!
-        </h1>
+            <div class="mini-strip">
+                <span class="mini-chip"><i class="fas fa-code"></i> web dev track</span>
+                <span class="mini-chip"><i class="fas fa-gamepad"></i> games &amp; tech</span>
+            </div>
 
-        <p class="hero-description">
-            Life may be full of compromises, but I will keep working toward a better future.
-        </p>
-    </div>
+            <div class="hero-links">
+                <a href="information.html" class="pill-btn">About Me</a>
+                <a href="family.html" class="pill-btn ghost">Family &amp; Friends</a>
+            </div>
+        </div>
+    </main>
 
-</main>
+    <footer class="footer">
+        <p>© 2026 <strong>Libiran, Cyrill Aljaylen S.</strong> | CICTS1E | All Rights Reserved.</p>
+    </footer>
+</div>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>
-        © 2026 <strong>Libiran, Cyrill Aljaylen S.</strong>
-        | CICTS1E | All Rights Reserved.
-    </p>
-</footer>
+<script>
+    const vibes = ['soft & steady', 'bsit web dev', 'quietly building'];
+    let vIdx = 0;
+    const moodCycle = document.getElementById('moodCycle');
+    const moodLabel = document.getElementById('moodLabel');
+    moodCycle.addEventListener('click', () => {
+        vIdx = (vIdx + 1) % vibes.length;
+        moodLabel.textContent = vibes[vIdx];
+        moodLabel.classList.remove('swap-anim');
+        void moodLabel.offsetWidth;
+        moodLabel.classList.add('swap-anim');
+    });
 
+    const notes = [
+        'Life may be full of compromises, but I will keep working toward a better future.',
+        'Small consistent steps every day add up to real progress.',
+        'Curious about code, games, and crafting calm digital spaces.'
+    ];
+    let nIdx = 0;
+    const quoteCycle = document.getElementById('quoteCycle');
+    const heroQuote = document.getElementById('heroQuote');
+    quoteCycle.addEventListener('click', () => {
+        nIdx = (nIdx + 1) % notes.length;
+        heroQuote.textContent = notes[nIdx];
+        heroQuote.classList.remove('swap-anim');
+        void heroQuote.offsetWidth;
+        heroQuote.classList.add('swap-anim');
+    });
+
+    const tiltBox = document.getElementById('tiltBox');
+    tiltBox.addEventListener('mousemove', (e) => {
+        const rect = tiltBox.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        tiltBox.style.transform = `perspective(800px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg)`;
+    });
+    tiltBox.addEventListener('mouseleave', () => {
+        tiltBox.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+    });
+
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString([], { hour12: false });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
 </body>
 </html>

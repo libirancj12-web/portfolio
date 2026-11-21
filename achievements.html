@@ -1,33 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CC1 Portfolio - Home</title>
+<title>CC1 Portfolio - Achievements</title>
 
-<!-- Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,SOFT,WONK,wght@9..144,100,1,600..800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* RESET & BASE STYLES */
+:root {
+    --bg: rgb(235, 221, 221);
+    --cream: #f6ecec;
+    --dark: #1b1b1b;
+    --mauve: #725c5c;
+    --sage: #6b7b6e;
+    --rose: #9c6b66;
+    --ink: #1b1b1b;
+    --ink-soft: #3d3939;
+    --font-serif: 'Fraunces', serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: rgb(235, 221, 221);
-    color: #1b1b1b;
-    min-height: 100vh;
-    overflow-x: hidden;
-    font-size: 18px;
-    line-height: 1.8;
+html, body {
+    height: 100dvh;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.55;
+}
+
+.app-shell {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    background:
+        radial-gradient(circle at 80% 18%, rgba(156, 107, 102, 0.18), transparent 45%),
+        radial-gradient(circle at 20% 82%, rgba(107, 123, 110, 0.18), transparent 45%),
+        var(--bg);
+}
+
+.dot-pattern {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background-image: radial-gradient(rgba(114, 92, 92, 0.32) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dots-top {
+    top: 16px;
+    right: 22px;
+}
+
+.dots-bottom {
+    bottom: 16px;
+    left: 22px;
+}
+
+.soft-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(65px);
+    z-index: 0;
+    animation: softPulse 8s ease-in-out infinite alternate;
+}
+
+.glow-a {
+    width: 280px;
+    height: 280px;
+    background: rgba(156, 107, 102, 0.18);
+    top: 14%;
+    right: 6%;
+}
+
+.glow-b {
+    width: 260px;
+    height: 260px;
+    background: rgba(107, 123, 110, 0.18);
+    bottom: 14%;
+    left: 5%;
+    animation-delay: -4s;
+}
+
+@keyframes softPulse {
+    0% { transform: scale(0.96); opacity: 0.7; }
+    100% { transform: scale(1.06); opacity: 1; }
 }
 
 a {
@@ -40,290 +114,477 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 80px;
+    padding: 16px 64px;
+    background-color: var(--dark);
+    border-bottom: 2px solid var(--mauve);
+    flex-shrink: 0;
     position: relative;
-    background-color: #1b1b1b;
-    z-index: 10;
+    z-index: 20;
 }
 
 .nav-left {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
 }
 
 .nav-left a {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16.5px;
+    font-weight: 500;
     color: #cccccc;
     position: relative;
     padding-bottom: 4px;
     transition: color 0.2s ease;
 }
 
-.nav-left a:hover {
+.nav-left a:hover,
+.nav-left a.active {
     color: #ffffff;
 }
 
-.nav-left a.active::after {
+.nav-left a::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 0;
     height: 2px;
-    background-color: #ffffff;
+    background: linear-gradient(90deg, var(--rose), var(--sage));
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.nav-left a:hover::after,
+.nav-left a.active::after {
+    width: 100%;
 }
 
 .brand-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 48px;
-    background-color: #ffffff;
-    color: #1b1b1b;
+    width: 44px;
+    height: 44px;
+    background-color: var(--cream);
+    color: var(--dark);
+    border: 2px solid var(--sage);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 16px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.social-links {
+.brand-logo:hover {
+    transform: translateX(-50%) scale(1.06);
+    border-color: var(--rose);
+}
+
+.header-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 12px;
+}
+
+.live-clock {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--cream);
+    background: rgba(107, 123, 110, 0.26);
+    border: 1px solid rgba(107, 123, 110, 0.55);
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
 .social-links a {
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     color: #cccccc;
-    transition: transform 0.2s ease, color 0.2s ease;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .social-links a:hover {
     color: #ffffff;
-    transform: translateY(-2px);
+    background-color: var(--rose);
+    transform: translateY(-1px);
 }
 
-/* MAIN CONTENT / CONTAINER */
+/* PAGE CONTAINER */
 .page-container {
-    max-width: 1280px;
+    flex: 1;
+    min-height: 0;
+    max-width: 1300px;
+    width: 100%;
     margin: 0 auto;
-    padding: 60px 80px 100px;
+    padding: 18px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
 }
 
-/* HERO SECTION */
 .hero-section {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-bottom: 70px;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: end;
+    gap: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px dashed rgba(156, 107, 102, 0.42);
+    flex-shrink: 0;
 }
 
-@media (min-width: 992px) {
-    .hero-section {
-        grid-template-columns: 1.8fr 1fr;
-        align-items: flex-end;
-    }
+.top-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.hero-kicker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #ffffff;
+    background-color: var(--sage);
+    padding: 3px 12px;
+    border-radius: 999px;
+}
+
+.filter-pills {
+    display: inline-flex;
+    gap: 6px;
+}
+
+.filter-btn {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(114, 92, 92, 0.35);
+    background: rgba(246, 236, 236, 0.82);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--dark);
+    color: #ffffff;
 }
 
 .hero-heading {
-    font-size: 56px;
-    font-weight: 800;
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-size: clamp(35px, 3.8vw, 50px);
+    font-weight: 700;
     line-height: 1.1;
-    letter-spacing: -1.5px;
-    color: #1b1b1b;
+    letter-spacing: -0.02em;
+    color: var(--ink);
 }
 
-@media (max-width: 768px) {
-    .hero-heading {
-        font-size: 38px;
-    }
+.hero-heading span {
+    color: var(--rose);
 }
 
 .hero-side-text {
-    font-size: 17px;
-    line-height: 1.6;
-    color: #4a4a4a;
-    font-weight: 500;
-    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 1.48;
+    color: var(--ink-soft);
+    padding: 10px 16px;
+    background: rgba(246, 236, 236, 0.8);
+    border: 1px solid rgba(156, 107, 102, 0.3);
+    border-left: 3px solid var(--rose);
+    border-radius: 0 14px 14px 0;
 }
 
-/* WORK / SERVICES LIST */
+.focus-pill {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--rose);
+    font-weight: 600;
+}
+
+/* LIST */
 .services-list {
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .service-item {
+    flex: 1;
+    min-height: 0;
     display: flex;
-    flex-direction: column;
-    padding: 45px 0;
-    border-top: 1px solid rgba(114, 92, 92, 0.35);
-    transition: background-color 0.2s ease;
+    align-items: center;
+    gap: 22px;
+    padding: 12px 24px;
+    background: rgba(246, 236, 236, 0.78);
+    border: 1px solid rgba(114, 92, 92, 0.28);
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(114, 92, 92, 0.06);
+    cursor: pointer;
+    transition: transform 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
 }
 
-@media (min-width: 768px) {
-    .service-item {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 120px;
-    }
+.service-item.hidden-item {
+    display: none;
+}
+
+.service-item:nth-child(1) .service-num { background-color: var(--sage); }
+.service-item:nth-child(2) .service-num { background-color: var(--rose); }
+.service-item:nth-child(3) .service-num { background-color: var(--mauve); }
+
+.service-item:nth-child(1) { border-left: 4px solid var(--sage); }
+.service-item:nth-child(2) { border-left: 4px solid var(--rose); }
+.service-item:nth-child(3) { border-left: 4px solid var(--mauve); }
+
+.service-item:hover,
+.service-item.highlighted {
+    transform: translateX(4px);
+    background: var(--cream);
+    border-color: rgba(156, 107, 102, 0.65);
 }
 
 .service-num {
-    font-size: 18px;
-    font-weight: 800;
-    color: #725c5c;
-    width: 40px;
-    margin-bottom: 12px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.service-item:hover .service-num,
+.service-item.highlighted .service-num {
+    background-color: var(--dark);
+    transform: scale(1.06);
 }
 
 .service-main-content {
     flex: 1;
-    max-width: 600px;
 }
 
 .service-title {
-    font-size: 34px;
+    font-family: var(--font-serif);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-size: clamp(23px, 2.4vw, 30px);
     font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 12px;
-    color: #1b1b1b;
+    color: var(--ink);
+    margin-bottom: 2px;
 }
 
 .service-desc {
-    font-size: 17px;
-    color: #4a4a4a;
-    line-height: 1.6;
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    line-height: 1.42;
 }
 
 /* FOOTER */
 .footer {
     width: 100%;
-    background-color: #1b1b1b;
+    background-color: var(--dark);
     color: #cccccc;
-    padding: 25px 80px;
+    padding: 13px 64px;
     text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    border-top: 1px solid rgba(156, 107, 102, 0.35);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 20;
 }
 
 .footer strong {
     color: #ffffff;
-    font-weight: 700;
 }
 
-.footer p {
-    line-height: 1.8;
-}
-
-/* MOBILE ADJUSTMENTS */
-@media (max-width: 600px) {
-    .header {
-        padding: 20px;
+@media (max-width: 900px) {
+    .header, .footer {
+        padding-left: 18px;
+        padding-right: 18px;
     }
 
-    .nav-left {
+    .live-clock, .dot-pattern, .hero-side-text {
         display: none;
     }
 
+    .nav-left {
+        gap: 12px;
+    }
+
+    .nav-left a {
+        font-size: 12.5px;
+    }
+
     .brand-logo {
-        width: 42px;
-        height: 42px;
+        position: static;
+        transform: none;
+        width: 34px;
+        height: 34px;
+        font-size: 11.5px;
     }
 
     .page-container {
-        padding: 40px 24px 60px;
+        padding: 14px 18px;
+        gap: 10px;
     }
 
-    .footer {
-        padding: 22px 15px;
-        font-size: 13px;
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding-bottom: 8px;
+    }
+
+    .service-item {
+        gap: 14px;
+        padding: 10px 14px;
+    }
+
+    .service-num {
+        width: 36px;
+        height: 36px;
+        font-size: 13.5px;
+    }
+
+    .service-desc {
+        font-size: 14px;
     }
 }
 </style>
 </head>
 
 <body>
+<div class="app-shell">
+    <div class="soft-glow glow-a"></div>
+    <div class="soft-glow glow-b"></div>
+    <div class="dot-pattern dots-top"></div>
+    <div class="dot-pattern dots-bottom"></div>
 
-<!-- HEADER -->
-<header class="header">
-    <ul class="nav-left">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="information.html">Personal Information</a></li>
-        <li><a href="achievements.html">Educational Achievements</a></li>
-        ]<li><a href="family.html">Family and Friends</a></li>
-    </ul>
+    <header class="header">
+        <ul class="nav-left">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html">Personal Information</a></li>
+            <li><a href="achievements.html" class="active">Educational Achievements</a></li>
+            <li><a href="family.html">Family and Friends</a></li>
+        </ul>
 
-    <div class="brand-logo">CC1</div>
+        <div class="brand-logo">CC1</div>
 
-    <div class="social-links">
-        <a href="#" title="Twitter">
-            <i class="fab fa-twitter"></i>
-        </a>
-    </div>
-</header>
-
-<!-- PAGE CONTENT -->
-<main class="page-container">
-
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-        <h1 class="hero-heading">
-            My Academic Achievements <br> throughout the years
-        </h1>
-        <p class="hero-side-text">
-            A showcase of academic excellence, personal growth, and dedication to continuous learning.
-        </p>
-    </section>
-
-    <!-- WORK / SERVICES LIST -->
-    <section class="services-list">
-
-        <!-- 01 -->
-        <article class="service-item">
-            <span class="service-num">01</span>
-            <div class="service-main-content">
-                <h2 class="service-title">Outstanding Performance in Social Sciences</h2>
-                <p class="service-desc">Peak critical understanding in Araling Panlipunan and humanities.</p>
+        <div class="header-right">
+            <span class="live-clock" id="liveClock">--:--:--</span>
+            <div class="social-links">
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
             </div>
-        </article>
+        </div>
+    </header>
 
-        <!-- 02 -->
-        <article class="service-item">
-            <span class="service-num">02</span>
-            <div class="service-main-content">
-                <h2 class="service-title">Conduct Award in Makatao</h2>
-                <p class="service-desc">This value focuses on empathy, kindness, respect for human rights, and inclusivity.</p>
+    <main class="page-container">
+        <section class="hero-section">
+            <div>
+                <div class="top-meta">
+                    <span class="hero-kicker">// milestones &amp; honors</span>
+                    <div class="filter-pills" id="filterPills">
+                        <button type="button" class="filter-btn active" data-filter="all">all</button>
+                        <button type="button" class="filter-btn" data-filter="academic">academic</button>
+                        <button type="button" class="filter-btn" data-filter="character">character &amp; work</button>
+                    </div>
+                </div>
+                <h1 class="hero-heading">My Academic <span>Achievements</span> throughout the years</h1>
             </div>
-        </article>
-
-        <!-- 03 -->
-        <article class="service-item">
-            <span class="service-num">03</span>
-            <div class="service-main-content">
-                <h2 class="service-title">Award for Work Immersion</h2>
-                <p class="service-desc">For Grade 12 students who achieve outstanding workplace evaluations during their external industry internships.</p>
+            <div class="hero-side-text">
+                <p id="reflectionText">Peak critical understanding in Araling Panlipunan and humanities.</p>
+                <span class="focus-pill" id="focusStatus">selected: #01 social sciences</span>
             </div>
-        </article>
+        </section>
 
-    </section>
+        <section class="services-list" id="achievementList">
+            <article class="service-item highlighted" data-category="academic" data-label="selected: #01 social sciences" data-reflection="Peak critical understanding in Araling Panlipunan and humanities.">
+                <span class="service-num">01</span>
+                <div class="service-main-content">
+                    <h2 class="service-title">Outstanding Performance in Social Sciences</h2>
+                    <p class="service-desc">Peak critical understanding in Araling Panlipunan and humanities.</p>
+                </div>
+            </article>
 
-</main>
+            <article class="service-item" data-category="character" data-label="selected: #02 conduct award in makatao" data-reflection="Built on kindness, respect, and treating classmates with warmth.">
+                <span class="service-num">02</span>
+                <div class="service-main-content">
+                    <h2 class="service-title">Conduct Award in Makatao</h2>
+                    <p class="service-desc">This value focuses on empathy, kindness, respect for human rights, and inclusivity.</p>
+                </div>
+            </article>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>
-        © 2026 <strong>Libiran, Cyrill Aljaylen S.</strong>
-        | CICTS1E | All Rights Reserved.
-    </p>
-</footer>
+            <article class="service-item" data-category="character" data-label="selected: #03 work immersion" data-reflection="Hands-on workplace discipline and reliability during internship hours.">
+                <span class="service-num">03</span>
+                <div class="service-main-content">
+                    <h2 class="service-title">Award for Work Immersion</h2>
+                    <p class="service-desc">For Grade 12 students who achieve outstanding workplace evaluations during their external industry internships.</p>
+                </div>
+            </article>
+        </section>
+    </main>
 
+    <footer class="footer">
+        <p>© 2026 <strong>Libiran, Cyrill Aljaylen S.</strong> | CICTS1E | All Rights Reserved.</p>
+    </footer>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString([], { hour12: false });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    const focusStatus = document.getElementById('focusStatus');
+    const reflectionText = document.getElementById('reflectionText');
+    const items = document.querySelectorAll('.service-item');
+
+    items.forEach((item) => {
+        item.addEventListener('click', () => {
+            items.forEach((el) => el.classList.remove('highlighted'));
+            item.classList.add('highlighted');
+            focusStatus.textContent = item.dataset.label;
+            reflectionText.textContent = item.dataset.reflection;
+        });
+    });
+
+    document.querySelectorAll('#filterPills .filter-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#filterPills .filter-btn').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            items.forEach((item) => {
+                const match = filter === 'all' || item.dataset.category === filter;
+                item.classList.toggle('hidden-item', !match);
+            });
+        });
+    });
+</script>
 </body>
 </html>
