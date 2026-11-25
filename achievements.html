@@ -386,6 +386,7 @@ a {
 
 .service-main-content {
     flex: 1;
+    min-width: 0;
 }
 
 .service-title {
@@ -401,6 +402,57 @@ a {
     font-size: 16.5px;
     color: var(--ink-soft);
     line-height: 1.42;
+}
+
+/* PICTURE BOX */
+.service-pic-box {
+    width: 156px;
+    height: 100px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(114, 92, 92, 0.42);
+    background: rgba(235, 221, 221, 0.65);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    color: var(--mauve);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    box-shadow: 0 4px 12px rgba(27, 27, 27, 0.08);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.service-pic-box.is-placeholder {
+    border-style: dashed;
+    box-shadow: none;
+}
+
+.service-item:hover .service-pic-box,
+.service-item.highlighted .service-pic-box {
+    border-color: var(--rose);
+    transform: scale(1.03);
+}
+
+.service-pic-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.service-item:hover .service-pic-box img {
+    transform: scale(1.06);
+}
+
+.service-pic-box i {
+    font-size: 19px;
+    opacity: 0.75;
 }
 
 /* FOOTER */
@@ -473,6 +525,12 @@ a {
     .service-desc {
         font-size: 14px;
     }
+
+    .service-pic-box {
+        width: 102px;
+        height: 70px;
+        font-size: 10.5px;
+    }
 }
 </style>
 </head>
@@ -509,40 +567,51 @@ a {
                     <span class="hero-kicker">// milestones &amp; honors</span>
                     <div class="filter-pills" id="filterPills">
                         <button type="button" class="filter-btn active" data-filter="all">all</button>
-                        <button type="button" class="filter-btn" data-filter="academic">academic</button>
-                        <button type="button" class="filter-btn" data-filter="character">character &amp; work</button>
+                        <button type="button" class="filter-btn" data-filter="senior">senior high</button>
+                        <button type="button" class="filter-btn" data-filter="basic">junior &amp; elem</button>
                     </div>
                 </div>
                 <h1 class="hero-heading">My Academic <span>Achievements</span> throughout the years</h1>
             </div>
             <div class="hero-side-text">
-                <p id="reflectionText">Peak critical understanding in Araling Panlipunan and humanities.</p>
-                <span class="focus-pill" id="focusStatus">selected: #01 social sciences</span>
+                <p id="reflectionText">Graduated Senior High Batch 2025 at Data Center College of the Philippines.</p>
+                <span class="focus-pill" id="focusStatus">selected: #01 data center</span>
             </div>
         </section>
 
         <section class="services-list" id="achievementList">
-            <article class="service-item highlighted" data-category="academic" data-label="selected: #01 social sciences" data-reflection="Peak critical understanding in Araling Panlipunan and humanities.">
+            <article class="service-item highlighted" data-category="senior" data-label="selected: #01 data center" data-reflection="Graduated Senior High Batch 2025 at Data Center College of the Philippines.">
                 <span class="service-num">01</span>
                 <div class="service-main-content">
-                    <h2 class="service-title">Outstanding Performance in Social Sciences</h2>
-                    <p class="service-desc">Peak critical understanding in Araling Panlipunan and humanities.</p>
+                    <h2 class="service-title">Graduate of School Year 2024 - 2025 (Senior High)</h2>
+                    <p class="service-desc">Data Center College of the Philippines</p>
+                </div>
+                <div class="service-pic-box">
+                    <img src="data.jpg" alt="Data Center College of the Philippines Senior High Graduation">
                 </div>
             </article>
 
-            <article class="service-item" data-category="character" data-label="selected: #02 conduct award in makatao" data-reflection="Built on kindness, respect, and treating classmates with warmth.">
+            <article class="service-item" data-category="basic" data-label="selected: #02 rizal national high school" data-reflection="Completed Junior High School (Batch 2023) at Rizal National High School.">
                 <span class="service-num">02</span>
                 <div class="service-main-content">
-                    <h2 class="service-title">Conduct Award in Makatao</h2>
-                    <p class="service-desc">This value focuses on empathy, kindness, respect for human rights, and inclusivity.</p>
+                    <h2 class="service-title">Graduate of School Year 2022 - 2023 (Junior High)</h2>
+                    <p class="service-desc">Rizal National High School</p>
+                </div>
+                <div class="service-pic-box">
+                    <img src="rizal.jpg" alt="Rizal National High School Junior High Certificate">
                 </div>
             </article>
 
-            <article class="service-item" data-category="character" data-label="selected: #03 work immersion" data-reflection="Hands-on workplace discipline and reliability during internship hours.">
+            <article class="service-item" data-category="basic" data-label="selected: #03 saints peter & paul" data-reflection="Completed Elementary Education (Batch 2019) at Saints Peter and Paul Learning Center.">
                 <span class="service-num">03</span>
                 <div class="service-main-content">
-                    <h2 class="service-title">Award for Work Immersion</h2>
-                    <p class="service-desc">For Grade 12 students who achieve outstanding workplace evaluations during their external industry internships.</p>
+                    <h2 class="service-title">Graduate of School Year 2018 - 2019 (Elementary)</h2>
+                    <p class="service-desc">Saints Peter and Paul Learning Center</p>
+                </div>
+                <div class="service-pic-box is-placeholder">
+                    <!-- Replace with: <img src="elem.jpg" alt="Saints Peter and Paul Learning Center"> -->
+                    <i class="fa-regular fa-image"></i>
+                    <span>photo</span>
                 </div>
             </article>
         </section>
